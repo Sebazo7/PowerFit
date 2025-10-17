@@ -1,7 +1,7 @@
-import "./App.css";
+import "@styles/index.css"
 
 function App() {
-  return <></>;
+  return <></>
 }
 
-export default App;
+export default App

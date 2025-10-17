@@ -1,4 +1,4 @@
-function Header() {
+export default function Header() {
   return (
     <header>
       <div className="container position-relative">
@@ -8,7 +8,5 @@ function Header() {
         </div>
       </div>
     </header>
-  );
+  )
 }
-
-export default Header;
