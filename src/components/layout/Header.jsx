@@ -1,12 +1,22 @@
+import { Navbar, Container } from "react-bootstrap"
+import "@styles/index.css"
 export default function Header() {
   return (
-    <header>
-      <div className="container position-relative">
-        <h1>PowerFit</h1>
-        <div>
-          <a href="">Paigna</a>
-        </div>
-      </div>
-    </header>
+    <>
+      <Navbar className="bg-body-tertiary bad-script-regular">
+        <Container>
+          <Navbar.Brand href="#home">
+            <img
+              alt=""
+              src="/public/vite.svg"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{" "}
+            React Bootstrap
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
+    </>
   )
 }
