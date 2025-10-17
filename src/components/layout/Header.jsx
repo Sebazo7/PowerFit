@@ -1,5 +1,4 @@
 import { Navbar, Container } from "react-bootstrap"
-import "@styles/index.css"
 export default function Header() {
   return (
     <>
