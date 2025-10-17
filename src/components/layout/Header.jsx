@@ -8,7 +8,7 @@ export default function Header() {
           <Navbar.Brand href="#home">
             <img
               alt=""
-              src="/public/vite.svg"
+              src="/src/assets/img/logos/logo2.PNG"
               width="30"
               height="30"
               className="d-inline-block align-top"
