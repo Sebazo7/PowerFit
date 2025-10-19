@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom"
-import { useAuth } from "@/context/AuthContext"
+import { useAuth } from "@hooks/useAuth"
 
 const RutaProtegida = ({ children }) => {
   const { estaAutenticado, cargando } = useAuth()

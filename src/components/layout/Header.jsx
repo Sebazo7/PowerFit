@@ -1,6 +1,6 @@
 import { Navbar, Container, Nav, Button, Dropdown } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
-import { useAuth } from "@/context/AuthContext"
+import { useAuth } from "@hooks/useAuth"
 
 const Encabezado = ({ cartItemsCount = 0, onCartClick }) => {
   const { usuario, estaAutenticado, cerrarSesion } = useAuth()
