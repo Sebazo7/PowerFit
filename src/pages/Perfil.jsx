@@ -9,7 +9,7 @@ import {
   Alert,
   Badge,
 } from "react-bootstrap"
-import { useAuth } from "@/context/AuthContext"
+import { useAuth } from "@hooks/useAuth"
 
 const Perfil = () => {
   const { usuario, actualizarPerfil, cerrarSesion } = useAuth()

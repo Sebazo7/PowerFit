@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Container, Row, Col, Card, Form, Button, Alert } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
-import { useAuth } from "@/context/AuthContext"
+import { useAuth } from "@hooks/useAuth"
 
 const Registro = () => {
   const [formData, setFormData] = useState({
