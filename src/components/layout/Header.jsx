@@ -20,17 +20,24 @@ const Encabezado = ({ cartItemsCount = 0, onCartClick }) => {
   }
 
   return (
-    <Navbar bg="white" expand="lg" className="shadow-lg sticky-top">
+    <Navbar bg="white" expand="lg" className="shadow-sm sticky-top">
       <Container fluid>
         {/* Logo y marca */}
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <div
-            className="bg-gradient-powerfit rounded d-flex align-items-center justify-content-center me-2"
-            style={{ width: "40px", height: "40px" }}
+            className="rounded d-flex align-items-center justify-content-center me-2"
+            style={{
+              width: "40px",
+              height: "40px",
+              background: "linear-gradient(135deg, #00d4d4, #1ea6d6)",
+            }}
           >
             <span className="text-white fw-bold fs-4">P</span>
           </div>
-          <h1 className="font-script fs-2 text-gradient fw-bold mb-0 bad-script-regular">
+          <h1
+            className="bad-script-regular fs-2 fw-bold mb-0"
+            style={{ color: "#00d4d4" }}
+          >
             PowerFit
           </h1>
         </Navbar.Brand>
@@ -88,7 +95,7 @@ const Encabezado = ({ cartItemsCount = 0, onCartClick }) => {
                   <Dropdown.Toggle
                     variant="outline-primary"
                     size="sm"
-                    className="position-relative"
+                    className="position-relative vend-sans-regular"
                     id="dropdown-usuario"
                   >
                     👤
