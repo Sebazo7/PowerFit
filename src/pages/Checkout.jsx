@@ -43,7 +43,8 @@ export default function Checkout() {
       {/* Información de envío */}
       {shipping && (
         <Alert variant="info" className="vend-sans-regular">
-          <strong>Envío a:</strong> {shipping.name}<br />
+          <strong>Envío a:</strong> {shipping.name}
+          <br />
           {shipping.address}, {shipping.city} - {shipping.postal}
         </Alert>
       )}

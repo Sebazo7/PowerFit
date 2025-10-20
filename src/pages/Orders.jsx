@@ -11,7 +11,7 @@ export default function Orders() {
   // Filtrar solo los pedidos del usuario actual
   const userOrders = useMemo(() => {
     if (!usuario) return []
-    return orders.filter(order => order.userId === usuario.id)
+    return orders.filter((order) => order.userId === usuario.id)
   }, [orders, usuario])
 
   return (
@@ -35,15 +35,19 @@ export default function Orders() {
             {userOrders.map((o) => (
               <tr key={o.id}>
                 <td>{o.id}</td>
-                <td>{new Date(o.createdAt).toLocaleString('es-ES', {
-                  year: 'numeric',
-                  month: 'short',
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit'
-                })}</td>
+                <td>
+                  {new Date(o.createdAt).toLocaleString("es-ES", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </td>
                 <td className="fw-bold">{toCLP(o.total)}</td>
-                <td>{o.items.length} producto{o.items.length !== 1 ? 's' : ''}</td>
+                <td>
+                  {o.items.length} producto{o.items.length !== 1 ? "s" : ""}
+                </td>
               </tr>
             ))}
           </tbody>

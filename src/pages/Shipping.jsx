@@ -15,13 +15,18 @@ export default function Shipping() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    
+
     // Validación adicional
-    if (!form.name.trim() || !form.address.trim() || !form.city.trim() || !form.postal.trim()) {
+    if (
+      !form.name.trim() ||
+      !form.address.trim() ||
+      !form.city.trim() ||
+      !form.postal.trim()
+    ) {
       alert("Por favor, completa todos los campos")
       return
     }
-    
+
     setShipping(form)
     navigate("/checkout")
   }
