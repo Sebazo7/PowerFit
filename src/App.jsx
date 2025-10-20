@@ -1,6 +1,6 @@
 import React from "react"
 import { BrowserRouter } from "react-router-dom"
-import { AuthProvider } from "@/context/AuthContext"
+import { AuthProvider } from "@/contexts/AuthContext"
 import Encabezado from "@components/layout/Header"
 import Footer from "@components/layout/Footer"
 import RutasApp from "@/routes/AppRoutes"

@@ -2,13 +2,18 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
+      "@/*": ["*"],
       "@components/*": ["components/*"],
       "@pages/*": ["pages/*"],
       "@hooks/*": ["hooks/*"],
       "@utils/*": ["utils/*"],
       "@services/*": ["services/*"],
       "@assets/*": ["assets/*"],
-      "@styles/*": ["styles/*"]
+      "@styles/*": ["styles/*"],
+      "@contexts/*": ["contexts/*"],
+      "@context/*": ["contexts/*"],
+      "@data/*": ["data/*"],
+      "@routes/*": ["routes/*"]
     },
     "target": "ES6",
     "module": "ESNext",

@@ -52,24 +52,6 @@ const Encabezado = () => {
         <Navbar.Toggle aria-controls="navegacion-principal" />
 
         <Navbar.Collapse id="navegacion-principal">
-          {/* Barra de búsqueda */}
-          <div
-            className="mx-auto my-2 my-lg-0"
-            style={{ maxWidth: "400px", width: "100%" }}
-          >
-            <div className="position-relative">
-              <input
-                type="text"
-                placeholder="Buscar suplementos..."
-                className="form-control ps-5 vend-sans-regular"
-                aria-label="Buscar suplementos"
-              />
-              <span className="position-absolute top-50 start-0 translate-middle-y ms-3 text-muted">
-                🔍
-              </span>
-            </div>
-          </div>
-
           {/* Enlaces de navegación */}
           <Nav className="ms-auto align-items-center">
             <Nav.Link

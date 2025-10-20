@@ -1,8 +1,15 @@
-const CONVERSION_RATE_USD_TO_CLP = 900
-
-export function toCLP(amountUSD) {
-    const clp = Math.round(amountUSD * CONVERSION_RATE_USD_TO_CLP)
-    return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(clp)
+/**
+ * Formatea un monto en pesos chilenos (CLP)
+ * @param {number} amountCLP - Monto en pesos chilenos
+ * @returns {string} Monto formateado con símbolo de moneda
+ */
+export function toCLP(amountCLP) {
+  return new Intl.NumberFormat("es-CL", {
+    style: "currency",
+    currency: "CLP",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amountCLP)
 }
 
 export default toCLP

@@ -65,7 +65,7 @@ const Inicio = () => {
           </div>
           <div className="hero-right">
             <img
-              src="/src/assets/img/logos/1366_2000.jpeg"
+              src="/images/1366_2000.jpeg"
               alt="PowerFit Gym"
               className="hero-image"
             />
