@@ -22,3 +22,61 @@ Reglas base para body, a, img, etc.
   font-weight: 400;
   font-style: normal;
 }
+
+.fondo {
+  background-color: rgb(21, 219, 226);
+}
+
+/* Hero styles */
+.hero-hero {
+  background: linear-gradient(90deg, #00d4d4, #1ea6d6);
+  padding: 3rem 0;
+  color: #fff;
+}
+
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-left {
+  max-width: 60%;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.hero-sub {
+  max-width: 600px;
+}
+
+.hero-image {
+  width: 320px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+
+.subscribe-card {
+  max-width: 700px;
+}
+
+
+.fade-in {
+  animation: fadeInUp .6s ease both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
