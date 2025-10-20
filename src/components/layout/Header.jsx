@@ -1,10 +1,16 @@
 import { Navbar, Container, Nav, Button, Dropdown } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "@hooks/useAuth"
+import { useCart } from "@/contexts/CartContext"
 
-const Encabezado = ({ cartItemsCount = 0, onCartClick }) => {
+const Encabezado = () => {
   const { usuario, estaAutenticado, cerrarSesion } = useAuth()
+  const { totalItems } = useCart()
   const navigate = useNavigate()
+
+  const manejarClickCarrito = () => {
+    navigate("/carrito")
+  }
 
   const manejarClickUsuario = () => {
     if (estaAutenticado) {
@@ -110,8 +116,11 @@ const Encabezado = ({ cartItemsCount = 0, onCartClick }) => {
                     <Dropdown.Item as={Link} to="/perfil">
                       👤 Mi Perfil
                     </Dropdown.Item>
-                    <Dropdown.Item onClick={onCartClick}>
+                    <Dropdown.Item as={Link} to="/carrito">
                       🛒 Mi Carrito
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/pedidos">
+                      📦 Mis Pedidos
                     </Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item
@@ -137,14 +146,14 @@ const Encabezado = ({ cartItemsCount = 0, onCartClick }) => {
               <Button
                 variant="outline-secondary"
                 size="sm"
-                onClick={onCartClick}
+                onClick={manejarClickCarrito}
                 className="position-relative vend-sans-regular"
                 aria-label="Carrito de compras"
               >
                 🛒
-                {cartItemsCount > 0 && (
+                {totalItems > 0 && (
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                    {cartItemsCount}
+                    {totalItems}
                     <span className="visually-hidden">
                       artículos en el carrito
                     </span>
