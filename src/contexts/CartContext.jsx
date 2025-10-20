@@ -32,7 +32,7 @@ function cartReducer(state, action) {
                 ),
             }
         case 'CLEAR':
-            return initialState
+            return { ...state, items: [], shipping: null }
         case 'SET_SHIPPING':
             return { ...state, shipping: action.payload }
         case 'ADD_ORDER':
@@ -47,7 +47,7 @@ export function CartProvider({ children }) {
         try {
             const raw = localStorage.getItem('cartState')
             return raw ? JSON.parse(raw) : init
-        } catch (e) {
+        } catch {
             return init
         }
     })
@@ -55,8 +55,8 @@ export function CartProvider({ children }) {
     useEffect(() => {
         try {
             localStorage.setItem('cartState', JSON.stringify(state))
-        } catch (e) {
-            // ignore
+        } catch {
+            // ignore localStorage errors
         }
     }, [state])
 
@@ -68,8 +68,19 @@ export function CartProvider({ children }) {
 
     const createOrder = (overrides = {}) => {
         const totalPrice = state.items.reduce((s, i) => s + i.quantity * i.price, 0)
+        
+        // Obtener usuario actual para asociar el pedido
+        let userId = null
+        try {
+            const usuario = JSON.parse(localStorage.getItem('usuario') || 'null')
+            userId = usuario?.id || null
+        } catch {
+            // Si no se puede obtener el usuario, continuar sin userId
+        }
+        
         const order = {
             id: `order_${Date.now()}`,
+            userId,
             items: state.items,
             total: totalPrice,
             shipping: overrides.shipping || state.shipping || null,

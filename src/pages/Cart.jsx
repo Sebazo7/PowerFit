@@ -36,9 +36,13 @@ export default function Cart() {
                       type="number"
                       min={1}
                       value={i.quantity}
-                      onChange={(e) =>
-                        setQuantity(i.id, Number(e.target.value))
-                      }
+                      onChange={(e) => {
+                        const newQuantity = Number(e.target.value)
+                        // Validar cantidad positiva
+                        if (newQuantity > 0) {
+                          setQuantity(i.id, newQuantity)
+                        }
+                      }}
                     />
                   </td>
                   <td>{toCLP(i.price * i.quantity)}</td>

@@ -15,6 +15,13 @@ export default function Shipping() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    
+    // Validación adicional
+    if (!form.name.trim() || !form.address.trim() || !form.city.trim() || !form.postal.trim()) {
+      alert("Por favor, completa todos los campos")
+      return
+    }
+    
     setShipping(form)
     navigate("/checkout")
   }
@@ -30,29 +37,37 @@ export default function Shipping() {
         <Form.Group className="mb-3">
           <Form.Label>Nombre completo</Form.Label>
           <Form.Control
+            required
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
+            placeholder="Ingresa tu nombre completo"
           />
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Dirección</Form.Label>
           <Form.Control
+            required
             value={form.address}
             onChange={(e) => setForm({ ...form, address: e.target.value })}
+            placeholder="Calle, número, depto."
           />
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Ciudad</Form.Label>
           <Form.Control
+            required
             value={form.city}
             onChange={(e) => setForm({ ...form, city: e.target.value })}
+            placeholder="Tu ciudad"
           />
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Código postal</Form.Label>
           <Form.Control
+            required
             value={form.postal}
             onChange={(e) => setForm({ ...form, postal: e.target.value })}
+            placeholder="Código postal"
           />
         </Form.Group>
         <Button type="submit" variant="success" className="vend-sans-regular">
