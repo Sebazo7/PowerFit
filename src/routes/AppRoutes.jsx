@@ -21,8 +21,22 @@ const RutasApp = () => {
       <Route path="/marcas" element={<Marcas />} />
       <Route path="/ofertas" element={<Ofertas />} />
       <Route path="/carrito" element={<Cart />} />
-      <Route path="/envio" element={<Shipping />} />
-      <Route path="/checkout" element={<Checkout />} />
+      <Route
+        path="/envio"
+        element={
+          <RutaProtegida>
+            <Shipping />
+          </RutaProtegida>
+        }
+      />
+      <Route
+        path="/checkout"
+        element={
+          <RutaProtegida>
+            <Checkout />
+          </RutaProtegida>
+        }
+      />
       <Route path="/login" element={<Login />} />
       <Route path="/registro" element={<Registro />} />
       <Route

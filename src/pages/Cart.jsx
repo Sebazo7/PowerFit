@@ -1,11 +1,13 @@
 import React from "react"
-import { Container, Table, Button, Form } from "react-bootstrap"
+import { Container, Table, Button, Form, Alert } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useCart } from "../contexts/CartContext"
+import { useAuth } from "../hooks/useAuth"
 import { toCLP } from "../utils/formatCurrency"
 
 export default function Cart() {
   const { items, removeItem, setQuantity, totalPrice, clear } = useCart()
+  const { estaAutenticado } = useAuth()
 
   return (
     <Container style={{ padding: "2rem 0" }}>
@@ -53,7 +55,31 @@ export default function Cart() {
               ))}
             </tbody>
           </Table>
-          <div className="d-flex justify-content-between align-items-center">
+
+          {!estaAutenticado && (
+            <Alert variant="warning" className="vend-sans-regular">
+              <Alert.Heading>Inicia sesión para continuar</Alert.Heading>
+              <p>
+                Debes iniciar sesión o registrarte para proceder con el pago y
+                gestionar tus pedidos.
+              </p>
+              <div className="d-flex gap-2">
+                <Button as={Link} to="/login" variant="primary" size="sm">
+                  Iniciar sesión
+                </Button>
+                <Button
+                  as={Link}
+                  to="/registro"
+                  variant="outline-primary"
+                  size="sm"
+                >
+                  Registrarse
+                </Button>
+              </div>
+            </Alert>
+          )}
+
+          <div className="d-flex justify-content-between align-items-center mt-3">
             <strong className="vend-sans-regular">
               Total: {toCLP(totalPrice)}
             </strong>
@@ -70,6 +96,7 @@ export default function Cart() {
                 to="/envio"
                 variant="success"
                 className="vend-sans-regular"
+                disabled={!estaAutenticado}
               >
                 Proceder al pago
               </Button>
