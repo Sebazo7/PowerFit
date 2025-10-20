@@ -1,4 +1,4 @@
-import { defineConfig, EnvironmentModuleGraph } from "vite"
+import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react-swc"
 import path from "path"
 import { fileURLToPath } from "url"
@@ -22,7 +22,7 @@ export default defineConfig({
     },
   },
   test: {
-    global: true,
+    globals: true,
     environment: "jsdom",
     setupFiles: "./test/setup.js",
     coverage: { provider: "v8", reporter: ["text", "html"] },
