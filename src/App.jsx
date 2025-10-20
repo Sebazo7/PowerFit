@@ -9,9 +9,19 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Encabezado />
-        <RutasApp />
-        <Footer />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            minHeight: "100vh",
+          }}
+        >
+          <Encabezado />
+          <main style={{ flex: "1" }}>
+            <RutasApp />
+          </main>
+          <Footer />
+        </div>
       </AuthProvider>
     </BrowserRouter>
   )
