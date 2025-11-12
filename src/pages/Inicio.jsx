@@ -95,7 +95,7 @@ const Inicio = () => {
           </Col>
 
           <Col md={4}>
-            <Card className="h-100 shadow-sm border-0">
+            <Card className="h-100 shadow border-0">
               <Card.Body className="text-center p-4">
                 <div className="mb-3" style={{ fontSize: "3rem" }}>
                   🏆
@@ -120,7 +120,7 @@ const Inicio = () => {
           </Col>
 
           <Col md={4}>
-            <Card className="h-100 shadow-sm border-0">
+            <Card className="h-100 shadow border-0">
               <Card.Body className="text-center p-4">
                 <div className="mb-3" style={{ fontSize: "3rem" }}>
                   🎯

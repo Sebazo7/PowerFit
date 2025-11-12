@@ -79,7 +79,7 @@ body,
 
 .fondo-image {
   background-image: url(/public/images/1366_2000.jpeg);
-  background-position: center;
+  background-position: unset;
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
