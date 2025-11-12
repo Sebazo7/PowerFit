@@ -65,7 +65,6 @@ body,
 .hero-image {
   width: 320px;
   border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
 
@@ -76,6 +75,14 @@ body,
 
 .fade-in {
   animation: fadeInUp .6s ease both;
+}
+
+.fondo-image {
+  background-image: url(/public/images/1366_2000.jpeg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 @keyframes fadeInUp {
