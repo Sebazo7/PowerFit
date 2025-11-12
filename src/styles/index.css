@@ -36,12 +36,10 @@ body,
   background-color: rgb(21, 219, 226);
 }
 
-/* Hero styles */
-.hero-hero {
-  background: linear-gradient(90deg, #00d4d4, #1ea6d6);
-  padding: 2rem 0;
-  color: #fff;
+.texto-cyan {
+  color: rgb(21, 219, 226);
 }
+/* Hero styles */
 
 .hero-container {
   display: flex;
