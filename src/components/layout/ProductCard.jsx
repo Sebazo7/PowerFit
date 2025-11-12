@@ -8,17 +8,17 @@ export default function ProductCard({ product }) {
 
   return (
     <Card className="mb-3 flex-fill shadow">
-      <div className="text-center" style={{ overflow: "hidden", height: 160 }}>
+      <div style={{ overflow: "hidden", height: 160 }}>
         <Card.Img
           variant="bottom"
           src={product.image}
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
         />
       </div>
       <Card.Body className="d-flex flex-column">
         <Card.Title>{product.name}</Card.Title>
         <Card.Text className="flex-grow-1">{product.description}</Card.Text>
-        <div className="d-flex justify-content-between align-items-center">
+        <div className="d-flex justify-content-between">
           <strong>{toCLP(product.price)}</strong>
           <Button variant="primary" onClick={() => addItem(product)}>
             Añadir
