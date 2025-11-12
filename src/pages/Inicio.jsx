@@ -10,10 +10,12 @@ const Inicio = () => {
   return (
     <>
       {/* Hero Section */}
-      <div className="hero-hero fondo-image d-flex align-items-center">
+      <div className="hero-hero fondo-image d-flex align-items-center text-white">
         <Container className="hero-container mt">
           <div className="hero-left">
-            <h1 className="hero-title bad-script-regular">PowerFit</h1>
+            <h1 className="hero-title bad-script-regular texto-cyan">
+              PowerFit
+            </h1>
             <p className="hero-sub vend-sans-regular">
               {estaAutenticado
                 ? `¡Bienvenido de nuevo, ${usuario?.nombre}! 👋 Tu tienda de confianza en suplementación y vitaminas.`
@@ -34,7 +36,7 @@ const Inicio = () => {
                     as={Link}
                     to="/carrito"
                     variant="outline-light"
-                    className="vend-sans-regular mb-3"
+                    className="vend-sans-regular mb-3 "
                   >
                     🛒 Mi Carrito
                   </Button>
@@ -46,7 +48,7 @@ const Inicio = () => {
                     to="/registro"
                     variant="light"
                     size="lg"
-                    className="me-2 vend-sans-regular fw-bold mb-3 me-5"
+                    className="me-2 vend-sans-regular fw-bold mb-3 me-5 shadow"
                   >
                     🎯 Crear Cuenta
                   </Button>
@@ -55,7 +57,7 @@ const Inicio = () => {
                     to="/login"
                     variant="outline-light"
                     size="lg"
-                    className="vend-sans-regular mb-3"
+                    className="vend-sans-regular mb-3 shadow"
                   >
                     👤 Iniciar Sesión
                   </Button>
