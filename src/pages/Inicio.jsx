@@ -10,7 +10,7 @@ const Inicio = () => {
   return (
     <>
       {/* Hero Section */}
-      <div className="hero-hero fondo-image">
+      <div className="hero-hero fondo-image d-flex align-items-center">
         <Container className="hero-container mt">
           <div className="hero-left">
             <h1 className="hero-title bad-script-regular">PowerFit</h1>
@@ -26,7 +26,7 @@ const Inicio = () => {
                     as={Link}
                     to="/productos"
                     variant="light"
-                    className="me-2 vend-sans-regular"
+                    className="me-2 vend-sans-regular mb-3"
                   >
                     Ver Productos
                   </Button>
@@ -34,7 +34,7 @@ const Inicio = () => {
                     as={Link}
                     to="/carrito"
                     variant="outline-light"
-                    className="vend-sans-regular"
+                    className="vend-sans-regular mb-3"
                   >
                     🛒 Mi Carrito
                   </Button>
