@@ -7,7 +7,7 @@ export default function ProductCard({ product }) {
   const { addItem } = useCart()
 
   return (
-    <Card className="mb-3 flex-fill">
+    <Card className="mb-3 flex-fill shadow">
       <div className="text-center" style={{ overflow: "hidden", height: 160 }}>
         <Card.Img
           variant="bottom"
