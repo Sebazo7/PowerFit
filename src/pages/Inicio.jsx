@@ -10,8 +10,8 @@ const Inicio = () => {
   return (
     <>
       {/* Hero Section */}
-      <div className="hero-hero">
-        <Container className="hero-container">
+      <div className="hero-hero fondo-image">
+        <Container className="hero-container mt">
           <div className="hero-left">
             <h1 className="hero-title bad-script-regular">PowerFit</h1>
             <p className="hero-sub vend-sans-regular">
@@ -46,7 +46,7 @@ const Inicio = () => {
                     to="/registro"
                     variant="light"
                     size="lg"
-                    className="me-2 vend-sans-regular fw-bold"
+                    className="me-2 vend-sans-regular fw-bold mb-3 me-5"
                   >
                     🎯 Crear Cuenta
                   </Button>
@@ -55,7 +55,7 @@ const Inicio = () => {
                     to="/login"
                     variant="outline-light"
                     size="lg"
-                    className="vend-sans-regular"
+                    className="vend-sans-regular mb-3"
                   >
                     👤 Iniciar Sesión
                   </Button>
@@ -63,21 +63,14 @@ const Inicio = () => {
               )}
             </div>
           </div>
-          <div className="hero-right">
-            <img
-              src="/images/1366_2000.jpeg"
-              alt="PowerFit Gym"
-              className="hero-image"
-            />
-          </div>
         </Container>
       </div>
 
       {/* Sección de características */}
       <Container className="py-5">
-        <Row className="g-4">
+        <Row className="g-4 sh">
           <Col md={4}>
-            <Card className="h-100 shadow-sm border-0">
+            <Card className="h-100 shadow border-0 ">
               <Card.Body className="text-center p-4">
                 <div className="mb-3" style={{ fontSize: "3rem" }}>
                   💪
