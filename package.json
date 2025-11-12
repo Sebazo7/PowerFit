@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "start": "vite --host 0.0.0.0 --port 3000"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
