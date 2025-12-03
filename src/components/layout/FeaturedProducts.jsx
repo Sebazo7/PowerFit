@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Row, Col, Spinner, Alert } from "react-bootstrap"
 import ProductCard from "./ProductCard"
 import { productoService } from "@/services"
+import { toSecureUrl } from "@/utils/toSecureUrl"
 
 export default function FeaturedProducts({ count = 4 }) {
   const [products, setProducts] = useState([])
@@ -18,7 +19,7 @@ export default function FeaturedProducts({ count = 4 }) {
           category: p.categoria,
           price: p.precio,
           description: p.descripcion,
-          image: p.image,
+          image: toSecureUrl(p.image),
         }))
         setProducts(mappedProducts)
       } catch (err) {

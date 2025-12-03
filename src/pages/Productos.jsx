@@ -2,6 +2,7 @@ import { Container, Row, Col, Spinner, Alert } from "react-bootstrap"
 import { useState, useEffect, useMemo } from "react"
 import ProductCard from "@/components/layout/ProductCard"
 import { productoService } from "@/services"
+import { toSecureUrl } from "@/utils/toSecureUrl"
 
 const Productos = () => {
   const [products, setProducts] = useState([])
@@ -21,7 +22,7 @@ const Productos = () => {
           category: p.categoria,
           price: p.precio,
           description: p.descripcion,
-          image: p.image,
+          image: toSecureUrl(p.image),
         }))
         setProducts(mappedProducts)
       } catch (err) {
