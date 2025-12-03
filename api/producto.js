@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   
   const base = 'http://52.0.134.157:8081';
   const path = req.url.replace(/^\/api\/producto/, '');
-  const url = `${base}/api/v1/productos${path}`;
+  const url = `${base}${path}`;
 
   console.log(`[Producto Proxy] ${req.method} ${url}`);
 

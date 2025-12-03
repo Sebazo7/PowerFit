@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   
   const base = 'http://52.0.134.157:8082';
   const path = req.url.replace(/^\/api\/usuario/, '');
-  const url = `${base}/api/v1/usuarios${path}`;
+  const url = `${base}${path}`;
 
   console.log(`[Usuario Proxy] ${req.method} ${url}`);
   console.log('[Usuario Proxy] Body:', JSON.stringify(req.body));
