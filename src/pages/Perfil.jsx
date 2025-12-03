@@ -31,7 +31,7 @@ const Perfil = () => {
     })
   }
 
-  const manejarActualizacion = (e) => {
+  const manejarActualizacion = async (e) => {
     e.preventDefault()
     setMensaje({ tipo: "", texto: "" })
 
@@ -61,19 +61,24 @@ const Perfil = () => {
       ...(formData.nuevaPassword && { password: formData.nuevaPassword }),
     }
 
-    const resultado = actualizarPerfil(datosActualizar)
+    try {
+      const resultado = await actualizarPerfil(datosActualizar)
 
-    if (resultado.exito) {
-      setMensaje({ tipo: "success", texto: resultado.mensaje })
-      setEditando(false)
-      setFormData({
-        ...formData,
-        password: "",
-        nuevaPassword: "",
-        confirmarPassword: "",
-      })
-    } else {
-      setMensaje({ tipo: "danger", texto: resultado.mensaje })
+      if (resultado.exito) {
+        setMensaje({ tipo: "success", texto: resultado.mensaje })
+        setEditando(false)
+        setFormData({
+          ...formData,
+          password: "",
+          nuevaPassword: "",
+          confirmarPassword: "",
+        })
+      } else {
+        setMensaje({ tipo: "danger", texto: resultado.mensaje })
+      }
+    } catch (error) {
+      console.error("Error al actualizar perfil:", error)
+      setMensaje({ tipo: "danger", texto: "Error al actualizar el perfil" })
     }
   }
 

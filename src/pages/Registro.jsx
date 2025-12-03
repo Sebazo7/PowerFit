@@ -33,24 +33,29 @@ const Registro = () => {
       return
     }
 
-    if (formData.password.length < 6) {
-      setError("La contraseña debe tener al menos 6 caracteres")
+    if (formData.password.length < 8) {
+      setError("La contraseña debe tener al menos 8 caracteres")
       return
     }
 
     setCargando(true)
 
-    // eslint-disable-next-line no-unused-vars
-    const { confirmarPassword, ...datosRegistro } = formData
-    const resultado = registrarUsuario(datosRegistro)
+    try {
+      // eslint-disable-next-line no-unused-vars
+      const { confirmarPassword, ...datosRegistro } = formData
+      const resultado = await registrarUsuario(datosRegistro)
 
-    if (resultado.exito) {
-      navigate("/")
-    } else {
-      setError(resultado.mensaje)
+      if (resultado.exito) {
+        navigate("/")
+      } else {
+        setError(resultado.mensaje)
+      }
+    } catch (error) {
+      setError("Error al registrar usuario. Por favor, intenta nuevamente.")
+      console.error("Error:", error)
+    } finally {
+      setCargando(false)
     }
-
-    setCargando(false)
   }
 
   return (

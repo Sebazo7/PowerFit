@@ -16,15 +16,20 @@ const Login = () => {
     setError("")
     setCargando(true)
 
-    const resultado = iniciarSesion(email, password)
+    try {
+      const resultado = await iniciarSesion(email, password)
 
-    if (resultado.exito) {
-      navigate("/")
-    } else {
-      setError(resultado.mensaje)
+      if (resultado.exito) {
+        navigate("/")
+      } else {
+        setError(resultado.mensaje)
+      }
+    } catch (err) {
+      console.error("Error en login:", err)
+      setError("Error al iniciar sesión")
+    } finally {
+      setCargando(false)
     }
-
-    setCargando(false)
   }
 
   return (

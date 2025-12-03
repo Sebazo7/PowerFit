@@ -1,20 +1,67 @@
-import { Container, Row, Col } from "react-bootstrap"
-import { useState, useMemo } from "react"
+import { Container, Row, Col, Spinner, Alert } from "react-bootstrap"
+import { useState, useEffect, useMemo } from "react"
 import ProductCard from "@/components/layout/ProductCard"
-import products from "@/data/products"
+import { productoService } from "@/services"
 
 const Productos = () => {
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState("All")
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await productoService.obtenerTodos()
+
+        // Mapear datos del backend (español) al frontend (inglés)
+        const mappedProducts = data.map(p => ({
+          id: p.id,
+          name: p.nombre,
+          category: p.categoria,
+          price: p.precio,
+          description: p.descripcion,
+          image: p.image
+        }))
+        setProducts(mappedProducts)
+      } catch (err) {
+        console.error(err)
+        setError("No se pudieron cargar los productos del servidor.")
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProducts()
+  }, [])
 
   const categories = useMemo(() => {
     const cats = new Set(products.map((p) => p.category))
     return ["All", ...Array.from(cats)]
-  }, [])
+  }, [products])
 
   const filtered =
     selectedCategory === "All"
       ? products
       : products.filter((p) => p.category === selectedCategory)
+
+  if (loading) {
+    return (
+      <Container style={{ padding: "2rem 0", textAlign: "center" }}>
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Cargando...</span>
+        </Spinner>
+      </Container>
+    )
+  }
+
+  if (error) {
+    return (
+      <Container style={{ padding: "2rem 0" }}>
+        <Alert variant="danger">{error}</Alert>
+      </Container>
+    )
+  }
 
   return (
     <Container style={{ padding: "2rem 0" }}>

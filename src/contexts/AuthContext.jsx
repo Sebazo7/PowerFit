@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { AuthContext } from "./AuthContextDefinition"
+import { usuarioService } from "../services"
 
 export const AuthProvider = ({ children }) => {
   const [usuario, setUsuario] = useState(null)
@@ -15,90 +16,89 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   // Iniciar sesión
-  const iniciarSesion = (email, password) => {
-    // Simulación de autenticación (reemplazar con llamada real a API)
-    const usuariosRegistrados = JSON.parse(
-      localStorage.getItem("usuarios") || "[]"
-    )
-    const usuarioEncontrado = usuariosRegistrados.find(
-      (u) => u.email === email && u.password === password
-    )
-
-    if (usuarioEncontrado) {
-      // eslint-disable-next-line no-unused-vars
-      const { password, ...usuarioSinPassword } = usuarioEncontrado
-      setUsuario(usuarioSinPassword)
-      localStorage.setItem("usuario", JSON.stringify(usuarioSinPassword))
-      return { exito: true, mensaje: "Sesión iniciada correctamente" }
+  const iniciarSesion = async (email, password) => {
+    try {
+      const resultado = await usuarioService.login(email, password)
+      
+      if (resultado) {
+        setUsuario(resultado)
+        localStorage.setItem("usuario", JSON.stringify(resultado))
+        return { exito: true, mensaje: "Sesión iniciada correctamente" }
+      }
+      
+      return { exito: false, mensaje: "Email o contraseña incorrectos" }
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error)
+      return { exito: false, mensaje: error.response?.data?.mensaje || "Error al iniciar sesión" }
     }
-
-    return { exito: false, mensaje: "Email o contraseña incorrectos" }
   }
 
   // Registrar nuevo usuario
-  const registrarUsuario = (datosUsuario) => {
-    const usuariosRegistrados = JSON.parse(
-      localStorage.getItem("usuarios") || "[]"
-    )
+  const registrarUsuario = async (datosUsuario) => {
+    try {
+      // Mapear campos del formulario a los campos de la API
+      const datosParaAPI = {
+        nombre: datosUsuario.nombre,
+        apellidos: datosUsuario.apellido,
+        email: datosUsuario.email,
+        contrasena: datosUsuario.password,
+        rol: "CLIENTE",
+        estado: true
+      }
 
-    // Verificar si el email ya existe
-    if (usuariosRegistrados.some((u) => u.email === datosUsuario.email)) {
-      return { exito: false, mensaje: "El email ya está registrado" }
+      const resultado = await usuarioService.registrar(datosParaAPI)
+      
+      if (resultado) {
+        // Iniciar sesión automáticamente
+        setUsuario(resultado)
+        localStorage.setItem("usuario", JSON.stringify(resultado))
+        return { exito: true, mensaje: "Usuario registrado correctamente" }
+      }
+      
+      return { exito: false, mensaje: "Error al registrar usuario" }
+    } catch (error) {
+      console.error("Error al registrar usuario:", error)
+      const mensaje = error.response?.data?.mensaje || "Error al registrar usuario"
+      return { exito: false, mensaje }
     }
-
-    // Agregar nuevo usuario
-    const nuevoUsuario = {
-      id: Date.now().toString(),
-      ...datosUsuario,
-      fechaRegistro: new Date().toISOString(),
-    }
-
-    usuariosRegistrados.push(nuevoUsuario)
-    localStorage.setItem("usuarios", JSON.stringify(usuariosRegistrados))
-
-    // Iniciar sesión automáticamente
-    // eslint-disable-next-line no-unused-vars
-    const { password, ...usuarioSinPassword } = nuevoUsuario
-    setUsuario(usuarioSinPassword)
-    localStorage.setItem("usuario", JSON.stringify(usuarioSinPassword))
-
-    return { exito: true, mensaje: "Usuario registrado correctamente" }
   }
 
   // Cerrar sesión
   const cerrarSesion = () => {
+    usuarioService.logout()
     setUsuario(null)
     localStorage.removeItem("usuario")
   }
 
   // Actualizar perfil
-  const actualizarPerfil = (datosActualizados) => {
-    const usuariosRegistrados = JSON.parse(
-      localStorage.getItem("usuarios") || "[]"
-    )
-    const indice = usuariosRegistrados.findIndex((u) => u.id === usuario.id)
-
-    if (indice !== -1) {
-      // Mantener la contraseña anterior si no se proporciona una nueva
-      const usuarioActualizado = {
-        ...usuariosRegistrados[indice],
-        ...datosActualizados,
-        password:
-          datosActualizados.password || usuariosRegistrados[indice].password,
+  const actualizarPerfil = async (datosActualizados) => {
+    try {
+      if (!usuario?.id) {
+        return { exito: false, mensaje: "No hay usuario autenticado" }
       }
 
-      usuariosRegistrados[indice] = usuarioActualizado
-      localStorage.setItem("usuarios", JSON.stringify(usuariosRegistrados))
+      const datosParaAPI = {
+        nombre: datosActualizados.nombre,
+        apellidos: datosActualizados.apellido || datosActualizados.apellidos,
+        email: datosActualizados.email,
+        ...(datosActualizados.password && { contrasena: datosActualizados.password }),
+        ...(datosActualizados.telefono && { telefono: datosActualizados.telefono }),
+        ...(datosActualizados.direccion && { direccion: datosActualizados.direccion }),
+      }
 
-      // eslint-disable-next-line no-unused-vars
-      const { password, ...usuarioSinPassword } = usuarioActualizado
-      setUsuario(usuarioSinPassword)
-      localStorage.setItem("usuario", JSON.stringify(usuarioSinPassword))
+      const resultado = await usuarioService.actualizar(usuario.id, datosParaAPI)
+      
+      if (resultado) {
+        setUsuario(resultado)
+        localStorage.setItem("usuario", JSON.stringify(resultado))
+        return { exito: true, mensaje: "Perfil actualizado correctamente" }
+      }
 
-      return { exito: true, mensaje: "Perfil actualizado correctamente" }
+      return { exito: false, mensaje: "Error al actualizar el perfil" }
+    } catch (error) {
+      console.error("Error al actualizar perfil:", error)
+      return { exito: false, mensaje: error.response?.data?.mensaje || "Error al actualizar el perfil" }
     }
-
-    return { exito: false, mensaje: "Error al actualizar el perfil" }
   }
 
   const valor = {
