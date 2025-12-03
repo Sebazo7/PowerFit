@@ -1,9 +1,12 @@
-import axios from 'axios';
-
 export default async function handler(req, res) {
+  // Importar axios dinámicamente para Vercel
+  const axios = (await import('axios')).default;
+  
   const base = 'http://52.0.134.157:8081';
   const path = req.url.replace(/^\/api\/producto/, '');
-  const url = `${base}${path || ''}`;
+  const url = `${base}/api/v1/productos${path}`;
+
+  console.log(`[Producto Proxy] ${req.method} ${url}`);
 
   try {
     const response = await axios({
@@ -11,13 +14,14 @@ export default async function handler(req, res) {
       url,
       headers: {
         'Content-Type': 'application/json',
-        ...(req.headers.authorization ? { Authorization: req.headers.authorization } : {}),
       },
       data: req.body,
       validateStatus: () => true,
     });
+    
     res.status(response.status).json(response.data);
   } catch (err) {
-    res.status(500).json({ mensaje: 'Proxy error producto', detalle: err.message });
+    console.error('[Producto Proxy Error]', err.message);
+    res.status(500).json({ mensaje: 'Error en proxy de producto', detalle: err.message });
   }
 }

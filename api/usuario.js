@@ -1,9 +1,12 @@
-import axios from 'axios';
-
 export default async function handler(req, res) {
+  // Importar axios dinámicamente para Vercel
+  const axios = (await import('axios')).default;
+  
   const base = 'http://52.0.134.157:8082';
   const path = req.url.replace(/^\/api\/usuario/, '');
-  const url = `${base}${path || ''}`;
+  const url = `${base}/api/v1/usuarios${path}`;
+
+  console.log(`[Usuario Proxy] ${req.method} ${url}`);
 
   try {
     const response = await axios({
@@ -11,13 +14,14 @@ export default async function handler(req, res) {
       url,
       headers: {
         'Content-Type': 'application/json',
-        ...(req.headers.authorization ? { Authorization: req.headers.authorization } : {}),
       },
       data: req.body,
       validateStatus: () => true,
     });
+    
     res.status(response.status).json(response.data);
   } catch (err) {
-    res.status(500).json({ mensaje: 'Proxy error usuario', detalle: err.message });
+    console.error('[Usuario Proxy Error]', err.message);
+    res.status(500).json({ mensaje: 'Error en proxy de usuario', detalle: err.message });
   }
 }
