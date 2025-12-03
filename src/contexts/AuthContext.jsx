@@ -19,17 +19,20 @@ export const AuthProvider = ({ children }) => {
   const iniciarSesion = async (email, password) => {
     try {
       const resultado = await usuarioService.login(email, password)
-      
+
       if (resultado) {
         setUsuario(resultado)
         localStorage.setItem("usuario", JSON.stringify(resultado))
         return { exito: true, mensaje: "Sesión iniciada correctamente" }
       }
-      
+
       return { exito: false, mensaje: "Email o contraseña incorrectos" }
     } catch (error) {
       console.error("Error al iniciar sesión:", error)
-      return { exito: false, mensaje: error.response?.data?.mensaje || "Error al iniciar sesión" }
+      return {
+        exito: false,
+        mensaje: error.response?.data?.mensaje || "Error al iniciar sesión",
+      }
     }
   }
 
@@ -43,22 +46,23 @@ export const AuthProvider = ({ children }) => {
         email: datosUsuario.email,
         contrasena: datosUsuario.password,
         rol: "CLIENTE",
-        estado: true
+        estado: true,
       }
 
       const resultado = await usuarioService.registrar(datosParaAPI)
-      
+
       if (resultado) {
         // Iniciar sesión automáticamente
         setUsuario(resultado)
         localStorage.setItem("usuario", JSON.stringify(resultado))
         return { exito: true, mensaje: "Usuario registrado correctamente" }
       }
-      
+
       return { exito: false, mensaje: "Error al registrar usuario" }
     } catch (error) {
       console.error("Error al registrar usuario:", error)
-      const mensaje = error.response?.data?.mensaje || "Error al registrar usuario"
+      const mensaje =
+        error.response?.data?.mensaje || "Error al registrar usuario"
       return { exito: false, mensaje }
     }
   }
@@ -81,13 +85,22 @@ export const AuthProvider = ({ children }) => {
         nombre: datosActualizados.nombre,
         apellidos: datosActualizados.apellido || datosActualizados.apellidos,
         email: datosActualizados.email,
-        ...(datosActualizados.password && { contrasena: datosActualizados.password }),
-        ...(datosActualizados.telefono && { telefono: datosActualizados.telefono }),
-        ...(datosActualizados.direccion && { direccion: datosActualizados.direccion }),
+        ...(datosActualizados.password && {
+          contrasena: datosActualizados.password,
+        }),
+        ...(datosActualizados.telefono && {
+          telefono: datosActualizados.telefono,
+        }),
+        ...(datosActualizados.direccion && {
+          direccion: datosActualizados.direccion,
+        }),
       }
 
-      const resultado = await usuarioService.actualizar(usuario.id, datosParaAPI)
-      
+      const resultado = await usuarioService.actualizar(
+        usuario.id,
+        datosParaAPI
+      )
+
       if (resultado) {
         setUsuario(resultado)
         localStorage.setItem("usuario", JSON.stringify(resultado))
@@ -97,7 +110,11 @@ export const AuthProvider = ({ children }) => {
       return { exito: false, mensaje: "Error al actualizar el perfil" }
     } catch (error) {
       console.error("Error al actualizar perfil:", error)
-      return { exito: false, mensaje: error.response?.data?.mensaje || "Error al actualizar el perfil" }
+      return {
+        exito: false,
+        mensaje:
+          error.response?.data?.mensaje || "Error al actualizar el perfil",
+      }
     }
   }
 

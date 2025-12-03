@@ -12,13 +12,13 @@ export default function FeaturedProducts({ count = 4 }) {
     const fetchProducts = async () => {
       try {
         const data = await productoService.obtenerTodos()
-        const mappedProducts = data.map(p => ({
+        const mappedProducts = data.map((p) => ({
           id: p.id,
           name: p.nombre,
           category: p.categoria,
           price: p.precio,
           description: p.descripcion,
-          image: p.image
+          image: p.image,
         }))
         setProducts(mappedProducts)
       } catch (err) {
@@ -33,7 +33,12 @@ export default function FeaturedProducts({ count = 4 }) {
 
   const featured = products.slice(0, count)
 
-  if (loading) return <div className="text-center"><Spinner animation="border" /></div>
+  if (loading)
+    return (
+      <div className="text-center">
+        <Spinner animation="border" />
+      </div>
+    )
   if (error) return <Alert variant="danger">{error}</Alert>
 
   return (

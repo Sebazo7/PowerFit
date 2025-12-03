@@ -15,13 +15,13 @@ const Productos = () => {
         const data = await productoService.obtenerTodos()
 
         // Mapear datos del backend (español) al frontend (inglés)
-        const mappedProducts = data.map(p => ({
+        const mappedProducts = data.map((p) => ({
           id: p.id,
           name: p.nombre,
           category: p.categoria,
           price: p.precio,
           description: p.descripcion,
-          image: p.image
+          image: p.image,
         }))
         setProducts(mappedProducts)
       } catch (err) {
