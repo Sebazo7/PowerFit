@@ -3,6 +3,7 @@
   "outputDirectory": "dist",
   "rewrites": [
     { "source": "/api/producto/:path*", "destination": "/api/producto" },
-    { "source": "/api/usuario/:path*", "destination": "/api/usuario" }
+    { "source": "/api/usuario/:path*", "destination": "/api/usuario" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
