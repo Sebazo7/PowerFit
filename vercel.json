@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "package.json", "use": "@vercel/static-build", "config": { "distDir": "dist" } },
+    { "src": "api/*.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/producto(.*)", "dest": "/api/producto.js" },
+    { "src": "/api/usuario(.*)", "dest": "/api/usuario.js" },
+    { "src": "/(.*)", "dest": "/dist/$1" }
+  ]
+}
